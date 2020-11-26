@@ -34,13 +34,15 @@ final class FormFactory
         $renderer->wrappers['control']['errorcontainer'] = 'span class=form-control-feedback';
         $renderer->wrappers['control']['.error'] = 'is-invalid';
 
+        $random = random_int(1, 9999);
+
         foreach ($form->getControls() as $control) {
             $type = $control->getOption('type');
             if ($type === 'button') {
                 $control->getControlPrototype()->addClass(empty($usedPrimary) ? 'btn btn-primary' : 'btn btn-secondary');
                 $usedPrimary = true;
             } elseif (in_array($type, ['text', 'textarea', 'select'], true)) {
-                $control->getControlPrototype()->addClass('form-control');
+                $control->getControlPrototype()->addClass('form-control')->placeholder('fid-' . $random);
             } elseif ($type === 'file') {
                 $control->getControlPrototype()->addClass('form-control-file');
             } elseif (in_array($type, ['checkbox', 'radio'], true)) {
