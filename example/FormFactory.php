@@ -8,6 +8,7 @@ use Nette\Application\UI\Form;
 use Nette\Forms\Controls\Checkbox;
 use Nette\Forms\IFormRenderer;
 use Nette\SmartObject;
+use Nette\Utils\Random;
 
 final class FormFactory
 {
@@ -34,9 +35,8 @@ final class FormFactory
         $renderer->wrappers['control']['errorcontainer'] = 'span class=form-control-feedback';
         $renderer->wrappers['control']['.error'] = 'is-invalid';
 
-        $random = random_int(1, 9999);
-
         foreach ($form->getControls() as $control) {
+            $random = Random::generate(5);
             $type = $control->getOption('type');
             if ($type === 'button') {
                 $control->getControlPrototype()->addClass(empty($usedPrimary) ? 'btn btn-primary' : 'btn btn-secondary');
