@@ -27,14 +27,8 @@ final class FormFactory
      */
     public function boostrapRender(Form $form)
     {
-        $renderer = $form->setRenderer(new BootstrapRender())->getRenderer();;
-        $renderer->wrappers['controls']['container'] = null;
-        $renderer->wrappers['pair']['container'] = 'div class="form-floating mb-3"';
-        $renderer->wrappers['pair']['.error'] = 'has-danger';
-        $renderer->wrappers['control']['description'] = 'span class=form-text';
-        $renderer->wrappers['control']['errorcontainer'] = 'span class=form-control-feedback';
-        $renderer->wrappers['control']['.error'] = 'is-invalid';
-
+        $form->setRenderer(new BootstrapRender());
+        
         foreach ($form->getControls() as $control) {
             $random = Random::generate(5);
             $type = $control->getOption('type');
